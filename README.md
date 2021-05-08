@@ -14,27 +14,6 @@ appropriate for the major languages that we use.
 See [here](https://www.terraform.io/docs/modules/index.html) for more
 details on Terraform modules and the standard module structure.
 
-## Usage ##
-
-```hcl
-module "example" {
-  source = "github.com/cisagov/cool-images-vmimport"
-
-  aws_region            = "us-west-1"
-  aws_availability_zone = "b"
-  subnet_id             = "subnet-0123456789abcdef0"
-
-  tags = {
-    Key1 = "Value1"
-    Key2 = "Value2"
-  }
-}
-```
-
-## Examples ##
-
-* [Deploying into the default VPC](https://github.com/cisagov/cool-images-vmimport/tree/develop/examples/default_vpc)
-
 ## Requirements ##
 
 | Name | Version |
@@ -73,13 +52,6 @@ module "example" {
 Running `pre-commit` requires running `terraform init` in every directory that
 contains Terraform code. In this repository, these are the main directory and
 every directory under `examples/`.
-
-## New Repositories from a Skeleton ##
-
-Please see our [Project Setup guide](https://github.com/cisagov/development-guide/tree/develop/project_setup)
-for step-by-step instructions on how to start a new repository from
-a skeleton. This will save you time and effort when configuring a
-new repository!
 
 ## Contributing ##
 

@@ -20,3 +20,15 @@ variable "tags" {
   description = "Tags to apply to all AWS resources created."
   default     = {}
 }
+
+variable "vmimport_policy_description" {
+  type        = string
+  description = "The description to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality."
+  default     = "Allows access requirements necessary for the AWS VM Import/Export feature to function using the specified resources."
+}
+
+variable "vmimport_policy_name" {
+  type        = string
+  description = "The name to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality."
+  default     = "Images-ServiceRoleAccess-vmimport"
+}

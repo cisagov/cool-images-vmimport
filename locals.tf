@@ -11,4 +11,7 @@ locals {
   # Extract the user name of the current caller for use
   # as assume role session names.
   caller_user_name = split("/", data.aws_caller_identity.current.arn)[1]
+
+  # Hardcoded value to provide the name for the vmimport service role.
+  vmimport_role_name = "vmimport"
 }

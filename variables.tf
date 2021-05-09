@@ -32,3 +32,9 @@ variable "vmimport_policy_name" {
   description = "The name to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality."
   default     = "Images-ServiceRoleAccess-vmimport"
 }
+
+variable "vmimport_role_description" {
+  type        = string
+  description = "The description to associate with the vmimport service role."
+  default     = "The service role that is required by the AWS VM Import/Export feature to function in this account."
+}

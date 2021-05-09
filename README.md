@@ -66,11 +66,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| arn | The EC2 instance ARN |
-| availability\_zone | The AZ where the EC2 instance is deployed |
-| id | The EC2 instance ID |
-| private\_ip | The private IP of the EC2 instance |
-| subnet\_id | The ID of the subnet where the EC2 instance is deployed |
+| vmimport\_role\_production | The ARN for the vmimport service role in the Images (Production) account. |
+| vmimport\_role\_staging | The ARN for the vmimport service role in the Images (Staging) account. |
 
 ## Notes ##
 

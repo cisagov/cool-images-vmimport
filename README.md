@@ -2,10 +2,22 @@
 
 [![GitHub Build Status](https://github.com/cisagov/cool-images-vmimport/workflows/build/badge.svg)](https://github.com/cisagov/cool-images-vmimport/actions)
 
-Terraform code to create the `vmimport` service role that is required by the
+Terraform code to create resources needed to use the
 [AWS VM Import/Export feature](https://docs.aws.amazon.com/vm-import/latest/userguide/what-is-vmimport.html)
-to function in the Images (Production) and Images (Staging) accounts in the
-COOL.
+in the Images (Production) and Images (Staging) accounts in the COOL. This
+includes the `vmimport` service role and `Images-VMImportExportAccess` role for
+each account.
+
+The `vmimport` service role is required by the VM Import/Export feature as
+specified in the
+[`Required service role`](https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role)
+section of the documentation.
+
+The `Images-VMImportExportAccess` role is created to provide an assumable role
+with sufficient permissions to use the AWS CLI to perform VM Import/Export tasks
+as specified in the
+[`Required permissions for IAM users`](https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#iam-permissions-image)
+section of the documentation.
 
 ## Pre-requisites ##
 

@@ -73,10 +73,10 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
-| vmimport\_policy\_description | The description to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality. | `string` | `"Allows access requirements necessary for the AWS VM Import/Export feature to function using the specified resources."` | no |
+| vmimport\_policy\_description | The description to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality. | `string` | `"Allows permissions necessary for the AWS VM Import/Export feature to function using the specified resources."` | no |
 | vmimport\_policy\_name | The name to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality. | `string` | `"Images-ServiceRoleAccess-vmimport"` | no |
 | vmimport\_role\_description | The description to associate with the vmimport service role. | `string` | `"The service role that is required by the AWS VM Import/Export feature to function in this account."` | no |
-| vmimportexportaccess\_role\_description | The description to associate with the IAM role and attached policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI. | `string` | `"Allows access requirements necessary to use the AWS VM Import/Export feature with the AWS CLI."` | no |
+| vmimportexportaccess\_role\_description | The description to associate with the IAM role and attached policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI. | `string` | `"Allows permissions necessary to use the AWS VM Import/Export feature with the AWS CLI."` | no |
 | vmimportexportaccess\_role\_name | The name to associate with the IAM role and attached policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI. | `string` | `"Images-VMImportExportAccess"` | no |
 
 ## Outputs ##

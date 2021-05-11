@@ -24,11 +24,11 @@ data "aws_iam_policy_document" "vmimport_production" {
   # Buckets to use for image export (AMI -> VM)
   statement {
     actions = [
+      "s3:GetBucketAcl",
       "s3:GetBucketLocation",
       "s3:GetObject",
       "s3:ListBucket",
       "s3:PutObject",
-      "s3:GetBucketAcl",
     ]
     resources = [
       data.terraform_remote_state.assessment_images.outputs.assessment_images_bucket_production.arn,
@@ -39,10 +39,10 @@ data "aws_iam_policy_document" "vmimport_production" {
   # AMI creation
   statement {
     actions = [
-      "ec2:ModifySnapshotAttribute",
       "ec2:CopySnapshot",
-      "ec2:RegisterImage",
       "ec2:Describe*",
+      "ec2:ModifySnapshotAttribute",
+      "ec2:RegisterImage",
     ]
     resources = [
       "*",
@@ -82,11 +82,11 @@ data "aws_iam_policy_document" "vmimport_staging" {
   # Buckets to use for image export (AMI -> VM)
   statement {
     actions = [
+      "s3:GetBucketAcl",
       "s3:GetBucketLocation",
       "s3:GetObject",
       "s3:ListBucket",
       "s3:PutObject",
-      "s3:GetBucketAcl",
     ]
     resources = [
       data.terraform_remote_state.assessment_images.outputs.assessment_images_bucket_staging.arn,
@@ -97,10 +97,10 @@ data "aws_iam_policy_document" "vmimport_staging" {
   # AMI creation
   statement {
     actions = [
-      "ec2:ModifySnapshotAttribute",
       "ec2:CopySnapshot",
-      "ec2:RegisterImage",
       "ec2:Describe*",
+      "ec2:ModifySnapshotAttribute",
+      "ec2:RegisterImage",
     ]
     resources = [
       "*",

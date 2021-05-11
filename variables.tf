@@ -33,6 +33,10 @@ variable "vmimport_policy_name" {
   default     = "Images-ServiceRoleAccess-vmimport"
 }
 
+# We do not have a var.vmimport_role_name because we use the statically defined
+# local.vmimport_role_name instead. This is because the role name must be
+# a specific value as described in
+# https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role
 variable "vmimport_role_description" {
   type        = string
   description = "The description to associate with the vmimport service role."

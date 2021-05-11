@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "vmimport_assume_role" {
       variable = "sts:Externalid"
 
       values = [
-        "vmimport"
+        local.vmimport_role_name
       ]
     }
   }

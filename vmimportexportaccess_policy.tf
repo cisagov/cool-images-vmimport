@@ -130,15 +130,15 @@ data "aws_iam_policy_document" "vmimportexportaccess_staging" {
 resource "aws_iam_policy" "vmimportexportaccess_production" {
   provider = aws.images_production
 
-  description = var.vmimportexportaccess_policy_description
-  name        = var.vmimportexportaccess_policy_name
+  description = var.vmimportexportaccess_role_description
+  name        = var.vmimportexportaccess_role_name
   policy      = data.aws_iam_policy_document.vmimportexportaccess_production.json
 }
 
 resource "aws_iam_policy" "vmimportexportaccess_staging" {
   provider = aws.images_staging
 
-  description = var.vmimportexportaccess_policy_description
-  name        = var.vmimportexportaccess_policy_name
+  description = var.vmimportexportaccess_role_description
+  name        = var.vmimportexportaccess_role_name
   policy      = data.aws_iam_policy_document.vmimportexportaccess_staging.json
 }

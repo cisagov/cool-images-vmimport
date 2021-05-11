@@ -39,14 +39,14 @@ variable "vmimport_role_description" {
   default     = "The service role that is required by the AWS VM Import/Export feature to function in this account."
 }
 
-variable "vmimportexportaccess_policy_description" {
+variable "vmimportexportaccess_role_description" {
   type        = string
-  description = "The description to associate with the IAM policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI."
+  description = "The description to associate with the IAM role and attached policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI."
   default     = "Allows access requirements necessary to use the AWS VM Import/Export feature with the AWS CLI."
 }
 
-variable "vmimportexportaccess_policy_name" {
+variable "vmimportexportaccess_role_name" {
   type        = string
-  description = "The name to associate with the IAM policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI."
+  description = "The name to associate with the IAM role and attached policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI."
   default     = "Images-VMImportExportAccess"
 }

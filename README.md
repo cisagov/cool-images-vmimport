@@ -19,6 +19,8 @@ COOL.
 - The following COOL accounts and roles must have been created:
   - Images (Production and Staging):
     [`cisagov/cool-accounts/images`](https://github.com/cisagov/cool-accounts/tree/develop/images)
+  - Terraform:
+    [`cisagov/cool-accounts/terraform`](https://github.com/cisagov/cool-accounts/tree/develop/terraform)
   - Users:
     [`cisagov/cool-accounts/users`](https://github.com/cisagov/cool-accounts/tree/develop/users)
 - Terraform in
@@ -44,7 +46,9 @@ COOL.
 
 ## Modules ##
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| read\_terraform\_state | github.com/cisagov/terraform-state-read-role-tf-module |  |
 
 ## Resources ##
 
@@ -73,6 +77,7 @@ No modules.
 | [terraform_remote_state.assessment_images](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 | [terraform_remote_state.images_production](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 | [terraform_remote_state.images_staging](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.terraform](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 | [terraform_remote_state.users](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
 ## Inputs ##
@@ -80,6 +85,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
+| read\_terraform\_state\_role\_name | The name to associate with the IAM role and attached policy that allows read-only access to the cool-images-vmimport state in the S3 bucket where Terraform state is stored. | `string` | `"ReadImagesVMImportTerraformState"` | no |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
 | vmimport\_policy\_description | The description to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality. | `string` | `"Allows permissions necessary for the AWS VM Import/Export feature to function using the specified resources."` | no |
 | vmimport\_policy\_name | The name to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality. | `string` | `"Images-ServiceRoleAccess-vmimport"` | no |
@@ -91,6 +97,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| read\_terraform\_state | The IAM policies and role that allow read-only access to the cool-images-vmimport state in the Terraform state bucket. |
 | vmimport\_role\_production | The ARN for the vmimport service role in the Images (Production) account. |
 | vmimport\_role\_staging | The ARN for the vmimport service role in the Images (Staging) account. |
 | vmimportexportaccess\_role\_production | The IAM role that can be assumed to manage VM Import/Export tasks in the Images (Production) account. |

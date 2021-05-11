@@ -15,6 +15,12 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "read_terraform_state_role_name" {
+  type        = string
+  description = "The name to associate with the IAM role and attached policy that allows read-only access to the cool-images-vmimport state in the S3 bucket where Terraform state is stored."
+  default     = "ReadImagesVMImportTerraformState"
+}
+
 variable "tags" {
   type        = map(string)
   description = "Tags to apply to all AWS resources created."

@@ -20,7 +20,9 @@ locals {
   # as assume role session names.
   caller_user_name = split("/", data.aws_caller_identity.current.arn)[1]
 
-  # Hardcoded value to provide the name for the vmimport service role.
+  # Hardcoded value to provide the name for the vmimport service role. This
+  # specific value is required by the VM Import/Export feature per
+  # https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role
   vmimport_role_name = "vmimport"
 
   # The account ID for the Users account

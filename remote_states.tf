@@ -16,7 +16,7 @@ data "terraform_remote_state" "assessment_images" {
     key            = "cool-images-assessment-images/terraform.tfstate"
   }
 
-  # There is only one environment for this remote state..
+  # There is only one environment for this remote state.
   workspace = "default"
 }
 

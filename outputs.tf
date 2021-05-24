@@ -1,24 +1,24 @@
-output "arn" {
-  value       = aws_instance.example.arn
-  description = "The EC2 instance ARN"
+output "read_terraform_state" {
+  value       = module.read_terraform_state
+  description = "The IAM policies and role that allow read-only access to the cool-images-vmimport state in the Terraform state bucket."
 }
 
-output "availability_zone" {
-  value       = aws_instance.example.availability_zone
-  description = "The AZ where the EC2 instance is deployed"
+output "vmimport_role_production" {
+  value       = aws_iam_role.vmimport_production.arn
+  description = "The ARN for the vmimport service role in the Images (Production) account."
 }
 
-output "id" {
-  value       = aws_instance.example.id
-  description = "The EC2 instance ID"
+output "vmimport_role_staging" {
+  value       = aws_iam_role.vmimport_staging.arn
+  description = "The ARN for the vmimport service role in the Images (Staging) account."
 }
 
-output "private_ip" {
-  value       = aws_instance.example.private_ip
-  description = "The private IP of the EC2 instance"
+output "vmimportexportaccess_role_production" {
+  value       = aws_iam_role.vmimportexportaccess_production
+  description = "The IAM role that can be assumed to manage VM Import/Export tasks in the Images (Production) account."
 }
 
-output "subnet_id" {
-  value       = aws_instance.example.subnet_id
-  description = "The ID of the subnet where the EC2 instance is deployed"
+output "vmimportexportaccess_role_staging" {
+  value       = aws_iam_role.vmimportexportaccess_staging
+  description = "The IAM role that can be assumed to manage VM Import/Export tasks in the Images (Staging) account."
 }

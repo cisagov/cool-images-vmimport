@@ -2,38 +2,42 @@
 
 [![GitHub Build Status](https://github.com/cisagov/cool-images-vmimport/workflows/build/badge.svg)](https://github.com/cisagov/cool-images-vmimport/actions)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) [Terraform
-module](https://www.terraform.io/docs/modules/index.html) GitHub
-repository started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit
-hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for the major languages that we use.
+Terraform code to create resources needed to use the
+[AWS VM Import/Export feature](https://docs.aws.amazon.com/vm-import/latest/userguide/what-is-vmimport.html)
+in the Images (Production) and Images (Staging) accounts in the COOL. This
+includes the `vmimport` service role and `Images-VMImportExportAccess` role for
+each account.
 
-See [here](https://www.terraform.io/docs/modules/index.html) for more
-details on Terraform modules and the standard module structure.
+The `vmimport` service role is required by the VM Import/Export feature as
+specified in the
+[`Required service role`](https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role)
+section of the documentation.
 
-## Usage ##
+The `Images-VMImportExportAccess` role is created to provide an assumable role
+with sufficient permissions to use the AWS CLI to perform VM Import/Export tasks
+as specified in the
+[`Required permissions for IAM users`](https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#iam-permissions-image)
+section of the documentation.
 
-```hcl
-module "example" {
-  source = "github.com/cisagov/cool-images-vmimport"
+## Pre-requisites ##
 
-  aws_region            = "us-west-1"
-  aws_availability_zone = "b"
-  subnet_id             = "subnet-0123456789abcdef0"
-
-  tags = {
-    Key1 = "Value1"
-    Key2 = "Value2"
-  }
-}
-```
-
-## Examples ##
-
-* [Deploying into the default VPC](https://github.com/cisagov/cool-images-vmimport/tree/develop/examples/default_vpc)
+- [Terraform](https://www.terraform.io/) installed on your system.
+- An accessible AWS S3 bucket to store Terraform state
+  (specified in [backend.tf](backend.tf)).
+- An accessible AWS DynamoDB database to store the Terraform state lock
+  (specified in [backend.tf](backend.tf)).
+- Access to all of the Terraform remote states specified in
+  [remote_states.tf](remote_states.tf).
+- The following COOL accounts and roles must have been created:
+  - Images (Production and Staging):
+    [`cisagov/cool-accounts/images`](https://github.com/cisagov/cool-accounts/tree/develop/images)
+  - Terraform:
+    [`cisagov/cool-accounts/terraform`](https://github.com/cisagov/cool-accounts/tree/develop/terraform)
+  - Users:
+    [`cisagov/cool-accounts/users`](https://github.com/cisagov/cool-accounts/tree/develop/users)
+- Terraform in
+  [`cisagov/cool-images-assessment-images`](https://github.com/cisagov/cool-images-assessment-images)
+  must have been applied.
 
 ## Requirements ##
 
@@ -47,39 +51,74 @@ module "example" {
 | Name | Version |
 |------|---------|
 | aws | ~> 3.0 |
+| aws.images\_production | ~> 3.0 |
+| aws.images\_staging | ~> 3.0 |
+| aws.users | ~> 3.0 |
+| terraform | n/a |
+
+## Modules ##
+
+| Name | Source | Version |
+|------|--------|---------|
+| read\_terraform\_state | github.com/cisagov/terraform-state-read-role-tf-module |  |
+
+## Resources ##
+
+| Name | Type |
+|------|------|
+| [aws_iam_policy.vmimport_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_policy.vmimport_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_policy.vmimportexportaccess_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_policy.vmimportexportaccess_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_role.vmimport_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.vmimport_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.vmimportexportaccess_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.vmimportexportaccess_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.vmimport_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.vmimport_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.vmimportexportaccess_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.vmimportexportaccess_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_caller_identity.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_caller_identity.users](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.vmimport_assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.vmimport_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.vmimport_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.vmimportexportaccess_assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.vmimportexportaccess_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.vmimportexportaccess_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [terraform_remote_state.assessment_images](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.images_production](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.images_staging](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.terraform](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [terraform_remote_state.users](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| ami_owner_account_id | The ID of the AWS account that owns the Example AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `self` | no |
-| aws_availability_zone | The AWS availability zone to deploy into (e.g. a, b, c, etc.) | `string` | `a` | no |
-| aws_region | The AWS region to deploy into (e.g. us-east-1) | `string` | `us-east-1` | no |
-| subnet_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `string` | n/a | yes |
-| tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
+| aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
+| read\_terraform\_state\_role\_name | The name to associate with the IAM role and attached policy that allows read-only access to the cool-images-vmimport state in the S3 bucket where Terraform state is stored. | `string` | `"ReadImagesVMImportTerraformState"` | no |
+| tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
+| vmimport\_policy\_description | The description to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality. | `string` | `"Allows permissions necessary for the AWS VM Import/Export feature to function using the specified resources."` | no |
+| vmimport\_policy\_name | The name to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality. | `string` | `"Images-ServiceRoleAccess-vmimport"` | no |
+| vmimport\_role\_description | The description to associate with the vmimport service role. | `string` | `"The service role that is required by the AWS VM Import/Export feature to function in this account."` | no |
+| vmimportexportaccess\_role\_description | The description to associate with the IAM role and attached policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI. | `string` | `"Allows permissions necessary to use the AWS VM Import/Export feature with the AWS CLI."` | no |
+| vmimportexportaccess\_role\_name | The name to associate with the IAM role and attached policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI. | `string` | `"Images-VMImportExportAccess"` | no |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
-| arn | The EC2 instance ARN |
-| availability_zone | The AZ where the EC2 instance is deployed |
-| id | The EC2 instance ID |
-| private_ip | The private IP of the EC2 instance |
-| subnet_id | The ID of the subnet where the EC2 instance is deployed |
+| read\_terraform\_state | The IAM policies and role that allow read-only access to the cool-images-vmimport state in the Terraform state bucket. |
+| vmimport\_role\_production | The ARN for the vmimport service role in the Images (Production) account. |
+| vmimport\_role\_staging | The ARN for the vmimport service role in the Images (Staging) account. |
+| vmimportexportaccess\_role\_production | The IAM role that can be assumed to manage VM Import/Export tasks in the Images (Production) account. |
+| vmimportexportaccess\_role\_staging | The IAM role that can be assumed to manage VM Import/Export tasks in the Images (Staging) account. |
 
 ## Notes ##
 
 Running `pre-commit` requires running `terraform init` in every directory that
-contains Terraform code. In this repository, these are the main directory and
-every directory under `examples/`.
-
-## New Repositories from a Skeleton ##
-
-Please see our [Project Setup guide](https://github.com/cisagov/development-guide/tree/develop/project_setup)
-for step-by-step instructions on how to start a new repository from
-a skeleton. This will save you time and effort when configuring a
-new repository!
+contains Terraform code. In this repository, this is only the main directory.
 
 ## Contributing ##
 

@@ -2,7 +2,7 @@
 # Retrieve the effective Account ID, User ID, and ARN in which Terraform is
 # authorized.  This is used to calculate the session names for assumed roles.
 # ------------------------------------------------------------------------------
-data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "default" {}
 
 # ------------------------------------------------------------------------------
 # Retrieve the caller identity for the "users" provider in order to
@@ -18,7 +18,7 @@ data "aws_caller_identity" "users" {
 locals {
   # Extract the user name of the current caller for use
   # as assume role session names.
-  caller_user_name = split("/", data.aws_caller_identity.current.arn)[1]
+  caller_user_name = split("/", data.aws_caller_identity.default.arn)[1]
 
   # Hardcoded value to provide the name for the vmimport service role. This
   # specific value is required by the VM Import/Export feature per

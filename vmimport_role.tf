@@ -9,7 +9,7 @@ resource "aws_iam_role" "vmimport_production" {
   assume_role_policy = data.aws_iam_policy_document.vmimport_assume_role.json
   description        = var.vmimport_role_description
   name               = local.vmimport_role_name
-  tags               = merge(var.tags, { "Workspace" = "production" })
+  tags               = { "Workspace" = "production" }
 }
 
 resource "aws_iam_role_policy_attachment" "vmimport_production" {
@@ -25,7 +25,7 @@ resource "aws_iam_role" "vmimport_staging" {
   assume_role_policy = data.aws_iam_policy_document.vmimport_assume_role.json
   description        = var.vmimport_role_description
   name               = local.vmimport_role_name
-  tags               = merge(var.tags, { "Workspace" = "staging" })
+  tags               = { "Workspace" = "staging" }
 }
 
 resource "aws_iam_role_policy_attachment" "vmimport_staging" {

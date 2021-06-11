@@ -44,23 +44,23 @@ section of the documentation.
 | Name | Version |
 |------|---------|
 | terraform | ~> 0.12.0 |
-| aws | ~> 3.0 |
+| aws | ~> 3.38 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.0 |
-| aws.images\_production | ~> 3.0 |
-| aws.images\_staging | ~> 3.0 |
-| aws.users | ~> 3.0 |
+| aws | ~> 3.38 |
+| aws.images\_production | ~> 3.38 |
+| aws.images\_staging | ~> 3.38 |
+| aws.users | ~> 3.38 |
 | terraform | n/a |
 
 ## Modules ##
 
 | Name | Source | Version |
 |------|--------|---------|
-| read\_terraform\_state | github.com/cisagov/terraform-state-read-role-tf-module |  |
+| read\_terraform\_state | github.com/cisagov/terraform-state-read-role-tf-module | n/a |
 
 ## Resources ##
 

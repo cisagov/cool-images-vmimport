@@ -10,7 +10,7 @@ resource "aws_iam_role" "vmimportexportaccess_production" {
   assume_role_policy = data.aws_iam_policy_document.vmimportexportaccess_assume_role.json
   description        = var.vmimportexportaccess_role_description
   name               = var.vmimportexportaccess_role_name
-  tags               = merge(var.tags, { "Workspace" = "production" })
+  tags               = { "Workspace" = "production" }
 }
 
 resource "aws_iam_role_policy_attachment" "vmimportexportaccess_production" {
@@ -26,7 +26,7 @@ resource "aws_iam_role" "vmimportexportaccess_staging" {
   assume_role_policy = data.aws_iam_policy_document.vmimportexportaccess_assume_role.json
   description        = var.vmimportexportaccess_role_description
   name               = var.vmimportexportaccess_role_name
-  tags               = merge(var.tags, { "Workspace" = "staging" })
+  tags               = { "Workspace" = "staging" }
 }
 
 resource "aws_iam_role_policy_attachment" "vmimportexportaccess_staging" {

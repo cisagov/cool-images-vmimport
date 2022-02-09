@@ -7,11 +7,11 @@ provider "aws" {
 }
 
 # The provider used to create the role that can be assumed to do everything
-# needed in the Images (Production) account.
+# needed in the Images account.
 provider "aws" {
-  alias = "images_production"
+  alias = "images"
   assume_role {
-    role_arn     = data.terraform_remote_state.images_production.outputs.provisionaccount_role.arn
+    role_arn     = data.terraform_remote_state.images.outputs.provisionaccount_role.arn
     session_name = local.caller_user_name
   }
   default_tags {

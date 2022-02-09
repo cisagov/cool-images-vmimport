@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# Create the IAM policies that give sufficient permissions to manage VM
-# Import/Export tasks in the Images (Production) account using the AWS CLI.
+# Create the IAM policy that gives sufficient permissions to manage VM
+# Import/Export tasks in the Images account using the AWS CLI.
 # ------------------------------------------------------------------------------
 
 # This policy document is based on the permissions required to use the VM
@@ -8,7 +8,7 @@
 # https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#iam-permissions-image
 # The CreateBucket and DeleteBucket permissions have been omitted as management
 # of the bucket is handled by the cisagov/cool-images-assessment-images project.
-data "aws_iam_policy_document" "vmimportexportaccess_production" {
+data "aws_iam_policy_document" "vmimportexportaccess" {
   statement {
     actions = [
       "s3:ListAllMyBuckets"
@@ -27,8 +27,8 @@ data "aws_iam_policy_document" "vmimportexportaccess_production" {
       "s3:PutObject",
     ]
     resources = [
-      data.terraform_remote_state.assessment_images.outputs.assessment_images_bucket_production.arn,
-      "${data.terraform_remote_state.assessment_images.outputs.assessment_images_bucket_production.arn}/*"
+      data.terraform_remote_state.assessment_images.outputs.imagesassessment_images_bucket.arn,
+      "${data.terraform_remote_state.assessment_images.outputs.imagesassessment_images_bucket.arn}/*"
     ]
   }
 
@@ -67,10 +67,10 @@ data "aws_iam_policy_document" "vmimportexportaccess_production" {
   }
 }
 
-resource "aws_iam_policy" "vmimportexportaccess_production" {
-  provider = aws.images_production
+resource "aws_iam_policy" "vmimportexportaccess" {
+  provider = aws.images
 
   description = var.vmimportexportaccess_role_description
   name        = var.vmimportexportaccess_role_name
-  policy      = data.aws_iam_policy_document.vmimportexportaccess_production.json
+  policy      = data.aws_iam_policy_document.vmimportexportaccess.json
 }

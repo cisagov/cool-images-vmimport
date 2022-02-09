@@ -4,9 +4,8 @@
 
 Terraform code to create resources needed to use the
 [AWS VM Import/Export feature](https://docs.aws.amazon.com/vm-import/latest/userguide/what-is-vmimport.html)
-in the Images (Production) and Images (Staging) accounts in the COOL. This
-includes the `vmimport` service role and `Images-VMImportExportAccess` role for
-each account.
+in the Images (Production) account in the COOL. This includes the `vmimport`
+service role and the `Images-VMImportExportAccess` role.
 
 The `vmimport` service role is required by the VM Import/Export feature as
 specified in the
@@ -29,7 +28,7 @@ section of the documentation.
 - Access to all of the Terraform remote states specified in
   [remote_states.tf](remote_states.tf).
 - The following COOL accounts and roles must have been created:
-  - Images (Production and Staging):
+  - Images (Production):
     [`cisagov/cool-accounts/images`](https://github.com/cisagov/cool-accounts/tree/develop/images)
   - Terraform:
     [`cisagov/cool-accounts/terraform`](https://github.com/cisagov/cool-accounts/tree/develop/terraform)
@@ -52,7 +51,6 @@ section of the documentation.
 |------|---------|
 | aws | ~> 3.38 |
 | aws.images\_production | ~> 3.38 |
-| aws.images\_staging | ~> 3.38 |
 | aws.users | ~> 3.38 |
 | terraform | n/a |
 
@@ -67,28 +65,19 @@ section of the documentation.
 | Name | Type |
 |------|------|
 | [aws_iam_policy.vmimport_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
-| [aws_iam_policy.vmimport_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.vmimportexportaccess_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
-| [aws_iam_policy.vmimportexportaccess_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.vmimport_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [aws_iam_role.vmimport_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role.vmimportexportaccess_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [aws_iam_role.vmimportexportaccess_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.vmimport_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.vmimport_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.vmimportexportaccess_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.vmimportexportaccess_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_caller_identity.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_caller_identity.users](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.vmimport_assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.vmimport_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.vmimport_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.vmimportexportaccess_assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.vmimportexportaccess_production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.vmimportexportaccess_staging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [terraform_remote_state.assessment_images](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 | [terraform_remote_state.images_production](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
-| [terraform_remote_state.images_staging](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 | [terraform_remote_state.terraform](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 | [terraform_remote_state.users](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
@@ -111,9 +100,7 @@ section of the documentation.
 |------|-------------|
 | read\_terraform\_state | The IAM policies and role that allow read-only access to the cool-images-vmimport state in the Terraform state bucket. |
 | vmimport\_role\_production | The ARN for the vmimport service role in the Images (Production) account. |
-| vmimport\_role\_staging | The ARN for the vmimport service role in the Images (Staging) account. |
 | vmimportexportaccess\_role\_production | The IAM role that can be assumed to manage VM Import/Export tasks in the Images (Production) account. |
-| vmimportexportaccess\_role\_staging | The IAM role that can be assumed to manage VM Import/Export tasks in the Images (Staging) account. |
 
 ## Notes ##
 

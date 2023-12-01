@@ -39,21 +39,22 @@ section of the documentation.
   [`cisagov/cool-images-assessment-images`](https://github.com/cisagov/cool-images-assessment-images)
   must have been applied.
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements ##
 
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.0 |
-| aws | ~> 3.38 |
+| aws | ~> 4.9 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.38 |
-| aws.images\_production | ~> 3.38 |
-| aws.images\_staging | ~> 3.38 |
-| aws.users | ~> 3.38 |
+| aws | ~> 4.9 |
+| aws.images\_production | ~> 4.9 |
+| aws.images\_staging | ~> 4.9 |
+| aws.users | ~> 4.9 |
 | terraform | n/a |
 
 ## Modules ##
@@ -114,6 +115,7 @@ section of the documentation.
 | vmimport\_role\_staging | The ARN for the vmimport service role in the Images (Staging) account. |
 | vmimportexportaccess\_role\_production | The IAM role that can be assumed to manage VM Import/Export tasks in the Images (Production) account. |
 | vmimportexportaccess\_role\_staging | The IAM role that can be assumed to manage VM Import/Export tasks in the Images (Staging) account. |
+<!-- END_TF_DOCS -->
 
 ## Notes ##
 

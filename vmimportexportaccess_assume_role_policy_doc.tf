@@ -11,10 +11,10 @@ data "aws_iam_policy_document" "vmimportexportaccess_assume_role" {
     ]
 
     principals {
-      type = "AWS"
       identifiers = [
         local.users_account_id,
       ]
+      type = "AWS"
     }
   }
 }

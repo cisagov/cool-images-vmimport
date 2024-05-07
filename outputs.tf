@@ -1,24 +1,24 @@
 output "read_terraform_state" {
-  value       = module.read_terraform_state
   description = "The IAM policies and role that allow read-only access to the cool-images-vmimport state in the Terraform state bucket."
+  value       = module.read_terraform_state
 }
 
 output "vmimport_role_production" {
-  value       = aws_iam_role.vmimport_production.arn
   description = "The ARN for the vmimport service role in the Images (Production) account."
+  value       = aws_iam_role.vmimport_production.arn
 }
 
 output "vmimport_role_staging" {
-  value       = aws_iam_role.vmimport_staging.arn
   description = "The ARN for the vmimport service role in the Images (Staging) account."
+  value       = aws_iam_role.vmimport_staging.arn
 }
 
 output "vmimportexportaccess_role_production" {
-  value       = aws_iam_role.vmimportexportaccess_production
   description = "The IAM role that can be assumed to manage VM Import/Export tasks in the Images (Production) account."
+  value       = aws_iam_role.vmimportexportaccess_production
 }
 
 output "vmimportexportaccess_role_staging" {
-  value       = aws_iam_role.vmimportexportaccess_staging
   description = "The IAM role that can be assumed to manage VM Import/Export tasks in the Images (Staging) account."
+  value       = aws_iam_role.vmimportexportaccess_staging
 }

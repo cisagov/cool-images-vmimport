@@ -16,27 +16,27 @@ variable "aws_region" {
 }
 
 variable "read_terraform_state_role_name" {
-  type        = string
-  description = "The name to associate with the IAM role and attached policy that allows read-only access to the cool-images-vmimport state in the S3 bucket where Terraform state is stored."
   default     = "ReadImagesVMImportTerraformState"
+  description = "The name to associate with the IAM role and attached policy that allows read-only access to the cool-images-vmimport state in the S3 bucket where Terraform state is stored."
+  type        = string
 }
 
 variable "tags" {
-  type        = map(string)
-  description = "Tags to apply to all AWS resources created."
   default     = {}
+  description = "Tags to apply to all AWS resources created."
+  type        = map(string)
 }
 
 variable "vmimport_policy_description" {
-  type        = string
-  description = "The description to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality."
   default     = "Allows permissions necessary for the AWS VM Import/Export feature to function using the specified resources."
+  description = "The description to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality."
+  type        = string
 }
 
 variable "vmimport_policy_name" {
-  type        = string
-  description = "The name to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality."
   default     = "Images-ServiceRoleAccess-vmimport"
+  description = "The name to associate with the IAM policy that allows the permissions necessary for the vmimport service role to allow VM import/export functionality."
+  type        = string
 }
 
 # We do not have a var.vmimport_role_name because we use the statically defined
@@ -44,19 +44,19 @@ variable "vmimport_policy_name" {
 # a specific value as described in
 # https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role
 variable "vmimport_role_description" {
-  type        = string
-  description = "The description to associate with the vmimport service role."
   default     = "The service role that is required by the AWS VM Import/Export feature to function in this account."
+  description = "The description to associate with the vmimport service role."
+  type        = string
 }
 
 variable "vmimportexportaccess_role_description" {
-  type        = string
-  description = "The description to associate with the IAM role and attached policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI."
   default     = "Allows permissions necessary to use the AWS VM Import/Export feature with the AWS CLI."
+  description = "The description to associate with the IAM role and attached policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI."
+  type        = string
 }
 
 variable "vmimportexportaccess_role_name" {
-  type        = string
-  description = "The name to associate with the IAM role and attached policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI."
   default     = "Images-VMImportExportAccess"
+  description = "The name to associate with the IAM role and attached policy that allows the permissions necessary to use the VM Import/Export feature with the AWS CLI."
+  type        = string
 }

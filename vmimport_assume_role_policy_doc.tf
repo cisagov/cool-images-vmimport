@@ -11,20 +11,19 @@ data "aws_iam_policy_document" "vmimport_assume_role" {
       "sts:AssumeRole",
     ]
 
-    principals {
-      type = "Service"
-      identifiers = [
-        "vmie.amazonaws.com",
-      ]
-    }
-
     condition {
-      test     = "StringEquals"
-      variable = "sts:Externalid"
-
+      test = "StringEquals"
       values = [
         local.vmimport_role_name
       ]
+      variable = "sts:Externalid"
+    }
+
+    principals {
+      identifiers = [
+        "vmie.amazonaws.com",
+      ]
+      type = "Service"
     }
   }
 }

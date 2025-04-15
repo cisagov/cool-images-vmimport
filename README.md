@@ -5,7 +5,7 @@
 Terraform code to create resources needed to use the [AWS VM Import/Export
 feature](https://docs.aws.amazon.com/vm-import/latest/userguide/what-is-vmimport.html)
 in the Images account in the COOL. This includes the `vmimport` service role and
-`Images-VMImportExportAccess` role for each account.
+`Images-VMImportExportAccess` role.
 
 The `vmimport` service role is required by the VM Import/Export feature as
 specified in the

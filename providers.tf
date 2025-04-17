@@ -7,25 +7,11 @@ provider "aws" {
 }
 
 # The provider used to create the role that can be assumed to do everything
-# needed in the Images (Production) account.
+# needed in the Images account.
 provider "aws" {
-  alias = "images_production"
+  alias = "images"
   assume_role {
-    role_arn     = data.terraform_remote_state.images_production.outputs.provisionaccount_role.arn
-    session_name = local.caller_user_name
-  }
-  default_tags {
-    tags = var.tags
-  }
-  region = var.aws_region
-}
-
-# The provider used to create the role that can be assumed to do everything
-# needed in the Images (Staging) account.
-provider "aws" {
-  alias = "images_staging"
-  assume_role {
-    role_arn     = data.terraform_remote_state.images_staging.outputs.provisionaccount_role.arn
+    role_arn     = data.terraform_remote_state.images.outputs.provisionaccount_role.arn
     session_name = local.caller_user_name
   }
   default_tags {
@@ -42,13 +28,7 @@ provider "aws" {
     session_name = local.caller_user_name
   }
   default_tags {
-    # It makes no sense to associate a "Workspace" tag with the
-    # Terraform read role, since it can read the state from any
-    # workspace.
-    #
-    # Such a tag will also flip flop as one switched from staging to
-    # production or vice versa, which is highly annoying.
-    tags = { for k, v in var.tags : k => v if k != "Workspace" }
+    tags = var.tags
   }
   region = var.aws_region
 }

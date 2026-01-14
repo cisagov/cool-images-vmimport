@@ -1,6 +1,8 @@
 # cool-images-vmimport #
 
 [![GitHub Build Status](https://github.com/cisagov/cool-images-vmimport/workflows/build/badge.svg)](https://github.com/cisagov/cool-images-vmimport/actions)
+[![License](https://img.shields.io/github/license/cisagov/cool-images-vmimport)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/cool-images-vmimport/workflows/CodeQL/badge.svg)](https://github.com/cisagov/cool-images-vmimport/actions/workflows/codeql-analysis.yml)
 
 Terraform code to create resources needed to use the [AWS VM Import/Export
 feature](https://docs.aws.amazon.com/vm-import/latest/userguide/what-is-vmimport.html)

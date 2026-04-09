@@ -44,14 +44,14 @@ section of the documentation.
 ## Requirements ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | terraform | ~> 1.1 |
 | aws | ~> 6.7 |
 
 ## Providers ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | aws | ~> 6.7 |
 | aws.images | ~> 6.7 |
 | aws.users | ~> 6.7 |
@@ -60,13 +60,13 @@ section of the documentation.
 ## Modules ##
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | read\_terraform\_state | github.com/cisagov/terraform-state-read-role-tf-module | n/a |
 
 ## Resources ##
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_policy.vmimport](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.vmimportexportaccess](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.vmimport](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
@@ -87,7 +87,7 @@ section of the documentation.
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
 | read\_terraform\_state\_role\_name | The name to associate with the IAM role and attached policy that allows read-only access to the cool-images-vmimport state in the S3 bucket where Terraform state is stored. | `string` | `"ReadImagesVMImportTerraformState"` | no |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
@@ -101,7 +101,7 @@ section of the documentation.
 ## Outputs ##
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | read\_terraform\_state | The IAM policies and role that allow read-only access to the cool-images-vmimport state in the Terraform state bucket. |
 | vmimport\_role | The ARN for the vmimport service role in the Images account. |
 | vmimportexportaccess\_role | The IAM role that can be assumed to manage VM Import/Export tasks in the Images account. |
